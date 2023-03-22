@@ -8,7 +8,17 @@ export default function Home() {
 			<Head>
 				<title>Blog website</title>
 			</Head>
-			<div className={styles.body}></div>
+			<div className={styles.body}>
+				<div className={styles.latest_post}></div>
+				<div className={styles.post}></div>
+				<div className={styles.post}></div>
+				<div className={styles.post}></div>
+				<div className={styles.post}></div>
+				<div className={styles.post}></div>
+				<div className={styles.post}></div>
+				<div className={styles.post}></div>
+				<div className={styles.post}></div>
+			</div>
 		</Layout>
 	);
 }

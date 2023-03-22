@@ -1,5 +1,28 @@
 .body {
-    min-height: 90vh;
-    width: 100vw;
+    min-height: 70vh;
+    width: 100%;
     background: #abc;
+
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
+
+    padding: 10px;
+}
+
+.post {
+    width: auto;
+    aspect-ratio: 1 / 1;
+    background: green;
+}
+
+.latest_post {
+    width: 100%;
+    min-height: 25vh;
+    aspect-ratio: 3;
+    background: green;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
 }
