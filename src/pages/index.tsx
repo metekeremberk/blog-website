@@ -1,24 +1,32 @@
-import styles from "../styles/home.module.css";
 import Head from "next/head";
 import Layout from "../components/layout";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import Posts from "@/components/Posts";
 
 export default function Home() {
-	return (
-		<Layout>
-			<Head>
-				<title>Blog website</title>
-			</Head>
-			<div className={styles.body}>
-				<div className={styles.latest_post}></div>
-				<div className={styles.post}></div>
-				<div className={styles.post}></div>
-				<div className={styles.post}></div>
-				<div className={styles.post}></div>
-				<div className={styles.post}></div>
-				<div className={styles.post}></div>
-				<div className={styles.post}></div>
-				<div className={styles.post}></div>
-			</div>
-		</Layout>
-	);
+  const session = useSession();
+  const supabase = useSupabaseClient();
+
+  return (
+    <>
+      {!session ? (
+        <Auth
+          supabaseClient={supabase}
+          appearance={{ theme: ThemeSupa }}
+          theme="dark"
+        />
+      ) : (
+        <>
+          <Layout>
+            <Head>
+              <title>Blog website</title>
+            </Head>
+            <Posts />
+          </Layout>
+        </>
+      )}
+    </>
+  );
 }
