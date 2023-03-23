@@ -1,4 +1,5 @@
 import styles from "../styles/layout.module.css";
+import Link from "next/link";
 
 export default function Navbar() {
 	return (
@@ -8,8 +9,9 @@ export default function Navbar() {
 				<ul>
 					<a href="">Homepage</a>
 					<a href="">Blogs</a>
-					<a href="">Sign Up</a>
-					<a href="">Login</a>
+					<Link href="/auth">Auth</Link>
+					{/* <a href="">Sign Up</a>
+					<a href="">Login</a> */}
 				</ul>
 			</header>
 		</>
