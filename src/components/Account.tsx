@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
-import {
-	useUser,
-	useSupabaseClient,
-	Session,
-} from "@supabase/auth-helpers-react";
+import { useUser, useSupabaseClient, Session } from "@supabase/auth-helpers-react";
 import { Database } from "../utils/database.types";
 type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
+import styles from "@/styles/profile.module.css";
 
 export default function Account({ session }: { session: Session }) {
 	const supabase = useSupabaseClient<Database>();
@@ -24,11 +21,7 @@ export default function Account({ session }: { session: Session }) {
 			setLoading(true);
 			if (!user) throw new Error("No user");
 
-			let { data, error, status } = await supabase
-				.from("profiles")
-				.select(`full_name, website, avatar_url`)
-				.eq("id", user.id)
-				.single();
+			let { data, error, status } = await supabase.from("profiles").select(`full_name, website, avatar_url`).eq("id", user.id).single();
 
 			if (error && status !== 406) {
 				throw error;
@@ -80,47 +73,30 @@ export default function Account({ session }: { session: Session }) {
 	}
 
 	return (
-		<div className="form-widget">
-			<div>
+		<div className={styles.account_box}>
+			<div className={styles.back_button}></div>
+			<div className={styles.avatar}></div>
+			<div className={styles.input}>
 				<label htmlFor="email">Email</label>
 				<input id="email" type="text" value={session.user.email} disabled />
 			</div>
-			<div>
+			<div className={styles.input}>
 				<label htmlFor="full_name">Full Name</label>
-				<input
-					id="full_name"
-					type="text"
-					value={full_name || ""}
-					onChange={(e) => setFull_name(e.target.value)}
-				/>
+				<input id="full_name" type="text" value={full_name || ""} onChange={(e) => setFull_name(e.target.value)} />
 			</div>
-			<div>
+			<div className={styles.input}>
 				<label htmlFor="website">Website</label>
-				<input
-					id="website"
-					type="website"
-					value={website || ""}
-					onChange={(e) => setWebsite(e.target.value)}
-				/>
+				<input id="website" type="website" value={website || ""} onChange={(e) => setWebsite(e.target.value)} />
 			</div>
 
-			<div>
-				<button
-					className="button primary block"
-					onClick={() => updateProfile({ full_name, website, avatar_url })}
-					disabled={loading}
-				>
+			<div className={styles.button}>
+				<button onClick={() => updateProfile({ full_name, website, avatar_url })} disabled={loading}>
 					{loading ? "Loading ..." : "Update"}
 				</button>
 			</div>
 
-			<div>
-				<button
-					className="button block"
-					onClick={() => supabase.auth.signOut()}
-				>
-					Sign Out
-				</button>
+			<div className={styles.button}>
+				<button onClick={() => supabase.auth.signOut()}>Sign Out</button>
 			</div>
 		</div>
 	);

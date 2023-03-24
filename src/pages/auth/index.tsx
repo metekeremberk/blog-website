@@ -1,7 +1,7 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import Account from "@/components/Account";
+import Redirect from "@/components/redirect";
 
 export default function Home() {
 	const session = useSession();
@@ -9,17 +9,7 @@ export default function Home() {
 
 	return (
 		<div className="container" style={{ padding: "50px 0 100px 0" }}>
-			{!session ? (
-				<Auth
-					supabaseClient={supabase}
-					appearance={{ theme: ThemeSupa }}
-					theme="dark"
-				/>
-			) : (
-				<div className="container" style={{ padding: "50px 0 100px 0" }}>
-					<Account session={session} />
-				</div>
-			)}
+			{!session ? <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="light" /> : <Redirect slug="/profile" />}
 		</div>
 	);
 }

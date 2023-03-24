@@ -6,27 +6,17 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Posts from "@/components/Posts";
 
 export default function Home() {
-  const session = useSession();
-  const supabase = useSupabaseClient();
+	const session = useSession();
+	const supabase = useSupabaseClient();
 
-  return (
-    <>
-      {!session ? (
-        <Auth
-          supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
-          theme="dark"
-        />
-      ) : (
-        <>
-          <Layout>
-            <Head>
-              <title>Blog website</title>
-            </Head>
-            <Posts />
-          </Layout>
-        </>
-      )}
-    </>
-  );
+	return (
+		<>
+			<Layout>
+				<Head>
+					<title>Blog website</title>
+				</Head>
+				<Posts />
+			</Layout>
+		</>
+	);
 }
